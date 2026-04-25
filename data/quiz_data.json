@@ -1,0 +1,47 @@
+[
+  {
+    "id": "q1",
+    "type": "multiple_choice",
+    "points": 20,
+    "question": "다음 중 '처음부터 다시 연주하라는' 뜻을 가진 음악 용어는?",
+    "options": ["다 카포", "스타카토", "루바토", "크레센도", "돌렌테"],
+    "correct_option": 1,
+    "correct_display": "1. 다 카포"
+  },
+  {
+    "id": "q2",
+    "type": "short_answer",
+    "points": 20,
+    "question": "음악의 3요소를 서술하시오.",
+    "placeholder": "예: 리듬, 선율, 화성",
+    "accepted_groups": [["리듬"], ["선율", "멜로디"], ["화성", "코드"]],
+    "correct_display": "리듬, 선율, 화성"
+  },
+  {
+    "id": "q3",
+    "type": "short_answer",
+    "points": 20,
+    "question": "4분의 4박자에서, 한 마디에 4분음표가 들어가는 개수는?",
+    "placeholder": "예: 4개",
+    "accepted_answers": ["4", "4개", "네개", "네"],
+    "correct_display": "4개"
+  },
+  {
+    "id": "q4",
+    "type": "multiple_choice",
+    "points": 20,
+    "question": "19세기 ~ 20세기 말, 미국 뉴올리언스에서 탄생한 음악으로, 즉흥 연주와 스윙 리듬이 특징인 장르의 이름은?",
+    "options": ["락앤롤", "리듬앤블루스", "재즈", "얼터너티브 록", "컨트리"],
+    "correct_option": 3,
+    "correct_display": "3. 재즈"
+  },
+  {
+    "id": "q5",
+    "type": "multiple_choice",
+    "points": 20,
+    "question": "저음을 내는 기타족의 현악기로, 콘트라베이스에서 개량되어 만들어진 악기의 이름은?",
+    "options": ["샤미센", "비올라", "베이스", "오르간"],
+    "correct_option": 3,
+    "correct_display": "3. 베이스"
+  }
+]
