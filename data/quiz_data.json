@@ -13,7 +13,6 @@
     "type": "short_answer",
     "points": 20,
     "question": "음악의 3요소를 서술하시오.",
-    "placeholder": "예: 리듬, 선율, 화성",
     "accepted_groups": [["리듬"], ["선율", "멜로디"], ["화성", "코드"]],
     "correct_display": "리듬, 선율, 화성"
   },
