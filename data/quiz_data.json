@@ -21,7 +21,6 @@
     "type": "short_answer",
     "points": 20,
     "question": "4분의 4박자에서, 한 마디에 4분음표가 들어가는 개수는?",
-    "placeholder": "예: 4개",
     "accepted_answers": ["4", "4개", "네개", "네"],
     "correct_display": "4개"
   },
