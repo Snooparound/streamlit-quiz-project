@@ -81,6 +81,7 @@ def get_answer_cache() -> dict:
 def load_quiz_data(path_text: str, file_version: float) -> list[dict]:
     """JSON 퀴즈 데이터를 읽고 캐시에 저장합니다."""
     del file_version
+    print("====== [시스템] 퀴즈 데이터를 로드했습니다. ======") # 터미널 로그 추가
     with open(path_text, "r", encoding="utf-8") as quiz_file:
         return json.load(quiz_file)
 
@@ -170,6 +171,7 @@ def render_login_area() -> None:
             st.success(f"{st.session_state.username}님으로 로그인 중입니다.")
         with col2:
             if st.button("로그아웃", use_container_width=True):
+                print(f"====== [동작] {st.session_state.username} 님이 로그아웃 버튼을 눌렀습니다. ======") # 터미널 로그 추가
                 st.session_state.logged_in = False
                 st.session_state.username = ""
                 st.session_state.current_question = 0
@@ -184,8 +186,10 @@ def render_login_area() -> None:
         login_password = st.text_input("비밀번호", type="password", key="login_password")
 
         if st.button("로그인하기", use_container_width=True):
+            print(f"====== [동작] 로그인 시도 - 아이디: {login_id} ======") # 터미널 로그 추가
             saved_user = users.get(login_id)
             if saved_user and saved_user["password_hash"] == hash_password(login_password):
+                print("====== [결과] 로그인 성공! ======") # 터미널 로그 추가
                 st.session_state.logged_in = True
                 st.session_state.username = login_id
                 st.session_state.current_question = 0
@@ -193,6 +197,7 @@ def render_login_area() -> None:
                 st.success("로그인에 성공했습니다.")
                 st.rerun()
             else:
+                print("====== [결과] 로그인 실패 (정보 불일치) ======") # 터미널 로그 추가
                 st.error("아이디 또는 비밀번호가 올바르지 않습니다.")
 
     with signup_tab:
@@ -203,6 +208,7 @@ def render_login_area() -> None:
         )
 
         if st.button("회원가입하기", use_container_width=True):
+            print(f"====== [동작] 회원가입 시도 - 아이디: {new_id} ======") # 터미널 로그 추가
             if len(new_id.strip()) < 3:
                 st.warning("아이디는 3글자 이상 입력하세요.")
             elif new_id in users:
@@ -216,6 +222,7 @@ def render_login_area() -> None:
                     "password_hash": hash_password(new_password),
                     "created_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                 }
+                print(f"====== [결과] 회원가입 성공 - 아이디: {new_id} ======") # 터미널 로그 추가
                 st.success("회원가입이 완료되었습니다. 로그인 탭에서 로그인하세요.")
 
 
@@ -286,11 +293,13 @@ def render_quiz(quiz_data: list[dict]) -> None:
     left, center, right = st.columns(3)
     with left:
         if st.button("이전 문제", disabled=question_index == 0, use_container_width=True):
+            print(f"====== [동작] {question_index + 1}번에서 이전 문제로 이동 ======") # 터미널 로그 추가
             st.session_state.current_question -= 1
             st.session_state.show_result = False
             st.rerun()
     with center:
         if st.button("답안 저장", use_container_width=True):
+            print(f"====== [동작] {question_index + 1}번 문제 답안 저장됨: {selected_answer} ======") # 터미널 로그 추가
             st.toast("현재 답안이 캐시에 저장되었습니다.")
     with right:
         if st.button(
@@ -298,6 +307,7 @@ def render_quiz(quiz_data: list[dict]) -> None:
             disabled=question_index == len(quiz_data) - 1,
             use_container_width=True,
         ):
+            print(f"====== [동작] {question_index + 1}번에서 다음 문제로 이동 ======") # 터미널 로그 추가
             st.session_state.current_question += 1
             st.session_state.show_result = False
             st.rerun()
@@ -309,6 +319,7 @@ def render_quiz(quiz_data: list[dict]) -> None:
         st.caption(f"답변 완료: {answered_count}/{len(quiz_data)}문항")
     with col2:
         if st.button("결과 확인", type="primary", use_container_width=True):
+            print("====== [동작] 최종 결과 확인 버튼 클릭됨! ======") # 터미널 로그 추가
             st.session_state.show_result = True
 
     if st.session_state.show_result:
@@ -333,6 +344,7 @@ def render_result(quiz_data: list[dict], user_answers: dict) -> None:
     st.dataframe(details, hide_index=True, use_container_width=True)
 
     if st.button("처음부터 다시 풀기"):
+        print("====== [동작] 처음부터 다시 풀기 버튼 클릭됨! (초기화) ======") # 터미널 로그 추가
         username = st.session_state.username
         answer_cache = get_answer_cache()
         answer_cache[username] = {}
@@ -367,4 +379,5 @@ def main() -> None:
 
 
 if __name__ == "__main__":
+    print("====== [시스템] Streamlit 앱이 성공적으로 실행되었습니다! ======") # 터미널 로그 추가
     main()
